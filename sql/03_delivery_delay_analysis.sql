@@ -55,3 +55,46 @@ ORDER BY delayed_delivery_flag;
 -- Delayed orders exceeded estimated delivery time by 14.31 minutes on average.
 -- Non-delayed orders arrived 1.50 minutes earlier than estimated on average.
 -- Prep time, distance, traffic, and weather were only slightly higher for delayed orders, suggesting the need for bucketed analysis.
+
+-- 3. Delay rate by delivery distance bucket
+-- Evaluates whether longer delivery distances are associated with higher delay risk.
+
+WITH distance_groups AS (
+    SELECT
+        CASE
+            WHEN delivery_distance_km < 10 THEN 'Under 10 km'
+            WHEN delivery_distance_km >= 10 AND delivery_distance_km < 20 THEN '10-19.99 km'
+            WHEN delivery_distance_km >= 20 AND delivery_distance_km < 30 THEN '20-29.99 km'
+            ELSE '30+ km'
+        END AS distance_bucket,
+        delayed_delivery_flag,
+        delivery_time_minutes,
+        estimated_delivery_time,
+        customer_rating,
+        refund_flag
+    FROM public.delivery_stats
+)
+
+SELECT
+    distance_bucket,
+    COUNT(*) AS total_orders,
+    ROUND(100.0 * AVG(delayed_delivery_flag::int), 2) AS delay_rate_pct,
+    ROUND(AVG(delivery_time_minutes), 2) AS avg_delivery_time,
+    ROUND(AVG(delivery_time_minutes - estimated_delivery_time), 2) AS avg_minutes_over_estimate,
+    ROUND(AVG(customer_rating), 2) AS avg_customer_rating,
+    ROUND(100.0 * AVG(refund_flag::int), 2) AS refund_rate_pct
+FROM distance_groups
+GROUP BY distance_bucket
+ORDER BY
+    CASE distance_bucket
+        WHEN 'Under 10 km' THEN 1
+        WHEN '10-19.99 km' THEN 2
+        WHEN '20-29.99 km' THEN 3
+        ELSE 4
+    END;
+
+-- Result Summary:
+-- Average delivery time increased sharply as distance increased, from 56.31 minutes for orders under 10 km to 131.77 minutes for orders 30+ km.
+-- Delay rate increased only modestly, from 8.79% for orders under 10 km to 10.26% for orders 30+ km.
+-- Average minutes over estimate remained close to zero across distance buckets.
+-- Distance increases delivery duration but does not appear to be a major delay-risk driver by itself.

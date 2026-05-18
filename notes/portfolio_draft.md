@@ -107,3 +107,11 @@ Delayed orders represented 9.47% of total orders, while non-delayed orders repre
 Delayed orders also exceeded their estimated delivery time by an average of 14.31 minutes, while non-delayed orders arrived 1.50 minutes earlier than estimated on average. This confirms that the delay flag captures a meaningful difference in delivery performance.
 
 However, the average preparation time, delivery distance, traffic score, and weather score were only slightly higher for delayed orders. This suggests that the drivers of delay may not be obvious from simple averages alone and should be investigated using grouped/bucketed analysis.
+
+### 2.3 Delay Rate by Delivery Distance
+
+Delivery distance had a strong relationship with actual delivery time. Orders under 10 km averaged 56.31 minutes, while orders 30 km or farther averaged 131.77 minutes.
+
+However, delay rate only increased modestly across distance buckets. Orders under 10 km had an 8.79% delay rate, while orders 30 km or farther had a 10.26% delay rate. Average minutes over estimate remained close to zero across all distance groups.
+
+This suggests that while longer delivery distances naturally lead to longer delivery times, distance alone does not appear to be a major delay driver in this dataset. Estimated delivery times may already account for distance reasonably well.
