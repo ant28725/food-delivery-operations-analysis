@@ -94,17 +94,30 @@ ORDER BY order_month;
 -- Month 11 had the lowest order volume with 1,198 orders and the lowest revenue at $143,693.17.
 -- No strong seasonal demand pattern was observed.
 
--- Demand by city tier
+-- 6. Demand by city tier
+-- Compares order volume, revenue, average spend, basket size, tips, and delivery fees by market tier.
+
 SELECT
     city_tier,
     COUNT(*) AS total_orders,
     ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS pct_of_orders,
     ROUND(SUM(final_amount_paid), 2) AS total_revenue,
     ROUND(AVG(final_amount_paid), 2) AS avg_final_amount_paid,
-    ROUND(AVG(tip_amount), 2) AS avg_tip
+    ROUND(AVG(order_value), 2) AS avg_order_value,
+    ROUND(AVG(number_of_items), 2) AS avg_items_per_order,
+    ROUND(AVG(tip_amount), 2) AS avg_tip,
+    ROUND(AVG(delivery_fee), 2) AS avg_delivery_fee
 FROM public.delivery_stats
 GROUP BY city_tier
 ORDER BY city_tier;
+
+-- Result Summary:
+-- City Tier 3 accounted for 7,520 orders, or 50.13% of total order volume.
+-- City Tier 1 accounted for 3,723 orders, or 24.82%.
+-- City Tier 2 accounted for 3,757 orders, or 25.05%.
+-- City Tier 3 generated the highest total revenue at $896,562.86.
+-- Average final amount paid was nearly identical across city tiers, ranging from $118.64 to $119.25.
+-- City Tier 3 appears to drive revenue through higher order volume rather than higher spend per order.
 
 -- 5. Demand by weekend/festival flag
 -- Compares order volume, revenue, average spend, tips, discounts, and item count

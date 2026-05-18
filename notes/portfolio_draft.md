@@ -47,3 +47,11 @@ Weekend and festival orders represented 20.58% of total order volume, while regu
 The average final amount paid on weekend/festival orders was $126.73 compared to $117.10 on regular days, a difference of $9.63 per order. This suggests that special demand periods may generate higher-value transactions even if they do not represent the majority of total order volume.
 
 Average tips, discounts, and item counts were relatively similar between the two groups, which suggests the higher final amount paid may be driven by other pricing or order-value factors rather than a major difference in basket size.
+
+### 1.6 Demand by City Tier
+
+City Tier 3 represented the largest share of demand, accounting for 7,520 orders, or 50.13% of total order volume. City Tiers 1 and 2 were nearly evenly split, with 3,723 orders and 3,757 orders respectively.
+
+Revenue followed the same pattern. City Tier 3 generated $896,562.86 in total revenue, compared to $443,957.37 for City Tier 1 and $445,735.04 for City Tier 2. However, average final amount paid was very similar across all three city tiers, ranging from $118.64 to $119.25.
+
+This suggests that City Tier 3 drives more revenue primarily because of higher order volume rather than higher customer spend per order. From an operational perspective, City Tier 3 may require greater delivery capacity and closer monitoring in later delay analysis because it accounts for roughly half of all orders.
