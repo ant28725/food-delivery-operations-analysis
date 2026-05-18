@@ -5,6 +5,11 @@
 -- Analyze order volume, revenue, and customer demand patterns
 -- across time, city tier, customer type, promo usage, and order size.
 -- =========================================================
+
+-- 1. Overall business summary
+
+-- Establishes the baseline size and value of the dataset.
+
 SELECT
     COUNT(*) AS total_orders,
     ROUND(SUM(final_amount_paid), 2) AS total_revenue,
@@ -16,7 +21,20 @@ SELECT
     ROUND(AVG(tip_amount), 2) AS avg_tip
 FROM public.delivery_stats;
 
--- Demand by hour
+-- Result:
+-- total_orders: 15,000
+-- total_revenue: $1,786,255.27
+-- avg_final_amount_paid: $119.08
+-- avg_order_value: $113.95
+-- avg_items_per_order: 6.49
+-- avg_delivery_fee: $7.49
+-- avg_discount: $14.93
+-- avg_tip: $12.57
+
+
+-- 2. Demand by hour
+-- Measures how order volume and revenue are distributed across the 24-hour day.
+
 SELECT
     order_hour,
     COUNT(*) AS total_orders,
@@ -26,6 +44,13 @@ SELECT
 FROM public.delivery_stats
 GROUP BY order_hour
 ORDER BY order_hour;
+
+-- Result Summary:
+-- Hourly demand was relatively evenly distributed.
+-- Each hour accounted for approximately 3.83% to 4.39% of all orders.
+-- Highest-volume hour: 00:00 with 659 orders.
+-- Lowest-volume hour: 12:00 with 574 orders.
+-- No major hourly demand spike was observed.
 
 -- Top 5 busiest order hours
 SELECT
