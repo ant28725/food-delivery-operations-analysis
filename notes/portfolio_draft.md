@@ -71,3 +71,31 @@ Promo-code orders accounted for 42.31% of total order volume, while non-promo or
 The average final amount paid was $119.01 for promo-code orders compared to $119.14 for non-promo orders, a difference of only $0.13. Average order value, discount amount, item count, and tip amount were also nearly identical between the two groups.
 
 This suggests that promo-code usage was common, but it did not appear to materially increase average order value or final customer payment in this dataset. A deeper analysis would require customer acquisition, retention, and repeat-order data to determine whether promos improved long-term customer behavior.
+
+### 1.9 Demand by Order Size
+
+Orders with 6 or more items represented the largest share of demand, accounting for 8,759 orders, or 58.39% of total order volume. Smaller orders were less common, with 1-item orders representing only 8.35% of all orders.
+
+Despite the difference in item count, average final amount paid was very similar across order-size groups. The average final amount paid ranged from $118.84 for 6+ item orders to $119.93 for 2-3 item orders. Average delivery time also remained relatively stable, ranging from 93.76 to 94.27 minutes across item-count groups.
+
+This suggests that while larger item-count orders dominate order volume, item count alone does not appear to meaningfully increase average customer spend or delivery time in this dataset.
+
+### Section 1 Summary: Demand Patterns
+
+The demand analysis showed that order volume was relatively stable by hour and month, but more concentrated by day of week, city tier, premium customer status, and order size.
+
+The strongest demand concentration appeared on Day 1, which accounted for 28.71% of all orders. City Tier 3 also represented a major share of the business, generating 50.13% of total order volume and roughly half of total revenue. Premium customers made up only 28.14% of orders but had an average final amount paid of $128.80, which was 11.73% higher than non-premium customers.
+
+Weekend/festival orders represented 20.58% of total volume but had a higher average final amount paid than regular-day orders. Promo-code usage was common, appearing in 42.31% of orders, but promo-code orders did not show a meaningful difference in average final amount paid compared to non-promo orders.
+
+Overall, this section established that demand is not heavily concentrated by hour or month, but is meaningfully segmented by day, city tier, premium customer status, and order size. These demand patterns provide context for the next section, which investigates delayed deliveries and their impact on customer and business outcomes.
+
+## Section 2: Delivery Delay Analysis
+
+After establishing demand patterns, I analyzed delivery performance to understand how often orders were delayed and which operational factors were associated with delay risk. This section compares delayed and non-delayed orders across actual delivery time, estimated delivery time, preparation time, distance, traffic, weather, and delivery partner characteristics.
+
+### 2.1 Overall Delay Summary
+
+The dataset contains 15,000 total orders, of which 1,420 were flagged as delayed. This represents an overall delay rate of 9.47%.
+
+The average actual delivery time and average estimated delivery time were both 94.14 minutes across the full dataset, resulting in an average minutes-over-estimate value of 0.00. This suggests that overall averages alone may hide important differences between delayed and non-delayed orders. To better understand delay patterns, I next compared delayed and non-delayed orders directly.
