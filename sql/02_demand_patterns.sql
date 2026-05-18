@@ -52,16 +52,26 @@ ORDER BY order_hour;
 -- Lowest-volume hour: 12:00 with 574 orders.
 -- No major hourly demand spike was observed.
 
--- Top 5 busiest order hours
+-- 3. Demand by day of week
+-- Measures order volume, revenue, average order value, items per order, and tip amount by day.
+
 SELECT
-    order_hour,
+    order_day_of_week,
     COUNT(*) AS total_orders,
     ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS pct_of_orders,
-    ROUND(SUM(final_amount_paid), 2) AS total_revenue
+    ROUND(SUM(final_amount_paid), 2) AS total_revenue,
+    ROUND(AVG(final_amount_paid), 2) AS avg_final_amount_paid,
+    ROUND(AVG(number_of_items), 2) AS avg_items_per_order,
+    ROUND(AVG(tip_amount), 2) AS avg_tip
 FROM public.delivery_stats
-GROUP BY order_hour
-ORDER BY total_orders DESC
-LIMIT 5;
+GROUP BY order_day_of_week
+ORDER BY order_day_of_week;
+
+-- Result Summary:
+-- Day 1 had the highest order volume with 4,306 orders, representing 28.71% of all orders.
+-- Days 2 through 6 were relatively even, each representing about 14% of total orders.
+-- Day 6 had the highest average final amount paid at $126.48.
+-- Because the dataset only includes day values 1 through 6, specific weekday names were not assigned.
 
 -- Demand by city tier
 SELECT
