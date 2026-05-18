@@ -31,3 +31,11 @@ Order volume showed a much stronger pattern by day of week than by hour. Day 1 a
 This suggests that demand is concentrated heavily on Day 1, which may require additional operational capacity if this pattern reflects a real recurring business cycle. However, the dataset only includes day values from 1 to 6, so I avoided assigning specific weekday names without supporting documentation.
 
 Day 6 had the highest average final amount paid at $126.48, compared to approximately $117–$118 across most other days. This indicates that Day 1 generated the most order volume, while Day 6 produced the highest average customer spend.
+
+### 1.4 Demand by Month
+
+Monthly order volume was relatively stable across the year. Each month accounted for roughly 8% to 9% of total orders, with Month 8 having the highest order volume at 1,295 orders and Month 11 having the lowest order volume at 1,198 orders.
+
+Revenue followed a similar pattern. Month 8 generated the highest total revenue at $155,567.37, while Month 11 generated the lowest total revenue at $143,693.17. However, the difference between the highest and lowest months was relatively small, suggesting that this dataset does not show a strong seasonal demand pattern.
+
+Because demand was evenly distributed across months, later analysis should focus more on operational factors such as delivery distance, preparation time, traffic, weather, and customer/order characteristics rather than seasonality.

@@ -73,6 +73,27 @@ ORDER BY order_day_of_week;
 -- Day 6 had the highest average final amount paid at $126.48.
 -- Because the dataset only includes day values 1 through 6, specific weekday names were not assigned.
 
+-- 4. Demand by month
+-- Measures monthly order volume, revenue, average final amount paid, discounts, and tips.
+
+SELECT
+    order_month,
+    COUNT(*) AS total_orders,
+    ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS pct_of_orders,
+    ROUND(SUM(final_amount_paid), 2) AS total_revenue,
+    ROUND(AVG(final_amount_paid), 2) AS avg_final_amount_paid,
+    ROUND(AVG(discount_amount), 2) AS avg_discount,
+    ROUND(AVG(tip_amount), 2) AS avg_tip
+FROM public.delivery_stats
+GROUP BY order_month
+ORDER BY order_month;
+
+-- Result Summary:
+-- Monthly demand was relatively stable, with each month representing approximately 8% to 9% of total orders.
+-- Month 8 had the highest order volume with 1,295 orders and the highest revenue at $155,567.37.
+-- Month 11 had the lowest order volume with 1,198 orders and the lowest revenue at $143,693.17.
+-- No strong seasonal demand pattern was observed.
+
 -- Demand by city tier
 SELECT
     city_tier,
