@@ -1,6 +1,10 @@
+-- =========================================================
 -- Section 1: Demand Patterns
-
--- Overall business summary
+-- Project: Food Delivery Operations Analysis
+-- Purpose:
+-- Analyze order volume, revenue, and customer demand patterns
+-- across time, city tier, customer type, promo usage, and order size.
+-- =========================================================
 SELECT
     COUNT(*) AS total_orders,
     ROUND(SUM(final_amount_paid), 2) AS total_revenue,
