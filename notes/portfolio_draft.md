@@ -99,3 +99,11 @@ After establishing demand patterns, I analyzed delivery performance to understan
 The dataset contains 15,000 total orders, of which 1,420 were flagged as delayed. This represents an overall delay rate of 9.47%.
 
 The average actual delivery time and average estimated delivery time were both 94.14 minutes across the full dataset, resulting in an average minutes-over-estimate value of 0.00. This suggests that overall averages alone may hide important differences between delayed and non-delayed orders. To better understand delay patterns, I next compared delayed and non-delayed orders directly.
+
+### 2.2 Delayed vs Non-Delayed Orders
+
+Delayed orders represented 9.47% of total orders, while non-delayed orders represented 90.53%. When comparing the two groups directly, delayed orders had an average delivery time of 110.49 minutes compared to 92.43 minutes for non-delayed orders. This means delayed orders took approximately 18.06 minutes longer on average.
+
+Delayed orders also exceeded their estimated delivery time by an average of 14.31 minutes, while non-delayed orders arrived 1.50 minutes earlier than estimated on average. This confirms that the delay flag captures a meaningful difference in delivery performance.
+
+However, the average preparation time, delivery distance, traffic score, and weather score were only slightly higher for delayed orders. This suggests that the drivers of delay may not be obvious from simple averages alone and should be investigated using grouped/bucketed analysis.
