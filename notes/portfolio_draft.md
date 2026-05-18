@@ -63,3 +63,11 @@ Premium customers represented 28.14% of total orders, while non-premium customer
 Premium customers had an average final amount paid of $128.80, compared to $115.28 for non-premium customers. This is a difference of $13.52 per order, or approximately 11.73% higher average spend.
 
 Average items per order and average tip amounts were nearly identical between the two groups, suggesting that the higher premium customer spend may be driven by higher base order values or different pricing/discount behavior rather than larger baskets or higher tipping.
+
+### 1.8 Demand by Promo Code Usage
+
+Promo-code orders accounted for 42.31% of total order volume, while non-promo orders accounted for 57.69%. Despite the high usage rate, promo-code orders did not show a meaningful difference in average customer spend.
+
+The average final amount paid was $119.01 for promo-code orders compared to $119.14 for non-promo orders, a difference of only $0.13. Average order value, discount amount, item count, and tip amount were also nearly identical between the two groups.
+
+This suggests that promo-code usage was common, but it did not appear to materially increase average order value or final customer payment in this dataset. A deeper analysis would require customer acquisition, retention, and repeat-order data to determine whether promos improved long-term customer behavior.
