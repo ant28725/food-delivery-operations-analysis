@@ -94,6 +94,31 @@ ORDER BY order_month;
 -- Month 11 had the lowest order volume with 1,198 orders and the lowest revenue at $143,693.17.
 -- No strong seasonal demand pattern was observed.
 
+-- 5. Demand by weekend/festival flag
+-- Compares order volume, revenue, average spend, tips, discounts, and item count
+-- between regular days and weekend/festival periods.
+
+SELECT
+    festival_or_weekend_flag,
+    COUNT(*) AS total_orders,
+    ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS pct_of_orders,
+    ROUND(SUM(final_amount_paid), 2) AS total_revenue,
+    ROUND(AVG(final_amount_paid), 2) AS avg_final_amount_paid,
+    ROUND(AVG(number_of_items), 2) AS avg_items_per_order,
+    ROUND(AVG(tip_amount), 2) AS avg_tip,
+    ROUND(AVG(discount_amount), 2) AS avg_discount
+FROM public.delivery_stats
+GROUP BY festival_or_weekend_flag
+ORDER BY festival_or_weekend_flag;
+
+-- Result Summary:
+-- Regular days accounted for 11,913 orders, or 79.42% of total order volume.
+-- Weekend/festival periods accounted for 3,087 orders, or 20.58% of total order volume.
+-- Weekend/festival orders had a higher average final amount paid: $126.73 vs $117.10.
+-- This represents a $9.63 increase per order, or roughly 8.22% higher average customer spend.
+-- Tips, discounts, and item counts were relatively similar between the two groups.
+
+
 -- 6. Demand by city tier
 -- Compares order volume, revenue, average spend, basket size, tips, and delivery fees by market tier.
 
@@ -119,30 +144,12 @@ ORDER BY city_tier;
 -- Average final amount paid was nearly identical across city tiers, ranging from $118.64 to $119.25.
 -- City Tier 3 appears to drive revenue through higher order volume rather than higher spend per order.
 
--- 5. Demand by weekend/festival flag
--- Compares order volume, revenue, average spend, tips, discounts, and item count
--- between regular days and weekend/festival periods.
 
-SELECT
-    festival_or_weekend_flag,
-    COUNT(*) AS total_orders,
-    ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS pct_of_orders,
-    ROUND(SUM(final_amount_paid), 2) AS total_revenue,
-    ROUND(AVG(final_amount_paid), 2) AS avg_final_amount_paid,
-    ROUND(AVG(number_of_items), 2) AS avg_items_per_order,
-    ROUND(AVG(tip_amount), 2) AS avg_tip,
-    ROUND(AVG(discount_amount), 2) AS avg_discount
-FROM public.delivery_stats
-GROUP BY festival_or_weekend_flag
-ORDER BY festival_or_weekend_flag;
 
--- Result Summary:
--- Regular days accounted for 11,913 orders, or 79.42% of total order volume.
--- Weekend/festival periods accounted for 3,087 orders, or 20.58% of total order volume.
--- Weekend/festival orders had a higher average final amount paid: $126.73 vs $117.10.
--- This represents a $9.63 increase per order, or roughly 8.22% higher average customer spend.
--- Tips, discounts, and item counts were relatively similar between the two groups.
--- Premium vs non-premium customer demand
+-- 7. Demand by premium customer status
+-- Compares order volume, revenue, average spend, basket size, tips, and loyalty score
+-- between premium and non-premium customers.
+
 SELECT
     premium_customer_flag,
     COUNT(*) AS total_orders,
@@ -150,8 +157,16 @@ SELECT
     ROUND(SUM(final_amount_paid), 2) AS total_revenue,
     ROUND(AVG(final_amount_paid), 2) AS avg_final_amount_paid,
     ROUND(AVG(order_value), 2) AS avg_order_value,
+    ROUND(AVG(number_of_items), 2) AS avg_items_per_order,
     ROUND(AVG(tip_amount), 2) AS avg_tip,
     ROUND(AVG(customer_loyalty_score), 2) AS avg_loyalty_score
 FROM public.delivery_stats
 GROUP BY premium_customer_flag
 ORDER BY premium_customer_flag;
+
+-- Result Summary:
+-- Premium customers accounted for 4,221 orders, or 28.14% of total order volume.
+-- Non-premium customers accounted for 10,779 orders, or 71.86% of total order volume.
+-- Premium customers had a higher average final amount paid: $128.80 vs $115.28.
+-- This represents a $13.52 increase per order, or approximately 11.73% higher average spend.
+-- Average items per order and average tip amounts were nearly identical between premium and non-premium customers.

@@ -55,3 +55,11 @@ City Tier 3 represented the largest share of demand, accounting for 7,520 orders
 Revenue followed the same pattern. City Tier 3 generated $896,562.86 in total revenue, compared to $443,957.37 for City Tier 1 and $445,735.04 for City Tier 2. However, average final amount paid was very similar across all three city tiers, ranging from $118.64 to $119.25.
 
 This suggests that City Tier 3 drives more revenue primarily because of higher order volume rather than higher customer spend per order. From an operational perspective, City Tier 3 may require greater delivery capacity and closer monitoring in later delay analysis because it accounts for roughly half of all orders.
+
+### 1.7 Demand by Premium Customer Status
+
+Premium customers represented 28.14% of total orders, while non-premium customers represented 71.86%. Although premium customers made up a smaller share of order volume, they generated higher average customer spend.
+
+Premium customers had an average final amount paid of $128.80, compared to $115.28 for non-premium customers. This is a difference of $13.52 per order, or approximately 11.73% higher average spend.
+
+Average items per order and average tip amounts were nearly identical between the two groups, suggesting that the higher premium customer spend may be driven by higher base order values or different pricing/discount behavior rather than larger baskets or higher tipping.
