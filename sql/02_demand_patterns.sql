@@ -106,7 +106,10 @@ FROM public.delivery_stats
 GROUP BY city_tier
 ORDER BY city_tier;
 
--- Demand by festival/weekend flag
+-- 5. Demand by weekend/festival flag
+-- Compares order volume, revenue, average spend, tips, discounts, and item count
+-- between regular days and weekend/festival periods.
+
 SELECT
     festival_or_weekend_flag,
     COUNT(*) AS total_orders,
@@ -114,11 +117,18 @@ SELECT
     ROUND(SUM(final_amount_paid), 2) AS total_revenue,
     ROUND(AVG(final_amount_paid), 2) AS avg_final_amount_paid,
     ROUND(AVG(number_of_items), 2) AS avg_items_per_order,
-    ROUND(AVG(tip_amount), 2) AS avg_tip
+    ROUND(AVG(tip_amount), 2) AS avg_tip,
+    ROUND(AVG(discount_amount), 2) AS avg_discount
 FROM public.delivery_stats
 GROUP BY festival_or_weekend_flag
 ORDER BY festival_or_weekend_flag;
 
+-- Result Summary:
+-- Regular days accounted for 11,913 orders, or 79.42% of total order volume.
+-- Weekend/festival periods accounted for 3,087 orders, or 20.58% of total order volume.
+-- Weekend/festival orders had a higher average final amount paid: $126.73 vs $117.10.
+-- This represents a $9.63 increase per order, or roughly 8.22% higher average customer spend.
+-- Tips, discounts, and item counts were relatively similar between the two groups.
 -- Premium vs non-premium customer demand
 SELECT
     premium_customer_flag,

@@ -39,3 +39,11 @@ Monthly order volume was relatively stable across the year. Each month accounted
 Revenue followed a similar pattern. Month 8 generated the highest total revenue at $155,567.37, while Month 11 generated the lowest total revenue at $143,693.17. However, the difference between the highest and lowest months was relatively small, suggesting that this dataset does not show a strong seasonal demand pattern.
 
 Because demand was evenly distributed across months, later analysis should focus more on operational factors such as delivery distance, preparation time, traffic, weather, and customer/order characteristics rather than seasonality.
+
+### 1.5 Weekend/Festival Demand
+
+Weekend and festival orders represented 20.58% of total order volume, while regular days accounted for 79.42% of orders. Although weekend/festival orders made up a smaller share of total demand, they had a higher average final amount paid.
+
+The average final amount paid on weekend/festival orders was $126.73 compared to $117.10 on regular days, a difference of $9.63 per order. This suggests that special demand periods may generate higher-value transactions even if they do not represent the majority of total order volume.
+
+Average tips, discounts, and item counts were relatively similar between the two groups, which suggests the higher final amount paid may be driven by other pricing or order-value factors rather than a major difference in basket size.
