@@ -115,3 +115,11 @@ Delivery distance had a strong relationship with actual delivery time. Orders un
 However, delay rate only increased modestly across distance buckets. Orders under 10 km had an 8.79% delay rate, while orders 30 km or farther had a 10.26% delay rate. Average minutes over estimate remained close to zero across all distance groups.
 
 This suggests that while longer delivery distances naturally lead to longer delivery times, distance alone does not appear to be a major delay driver in this dataset. Estimated delivery times may already account for distance reasonably well.
+
+### 2.4 Delay Rate by Preparation Time
+
+Preparation time showed a clear relationship with total delivery duration. Orders with preparation times under 20 minutes averaged 77.18 minutes, while orders with preparation times of 40 minutes or more averaged 108.34 minutes.
+
+However, delay rates remained relatively similar across preparation-time groups. Orders under 20 minutes had a 9.26% delay rate, while orders with 40+ minutes of preparation time had a 9.95% delay rate.
+
+This suggests that longer preparation times increase total delivery duration, but they do not appear to substantially increase delay risk by themselves. Similar to delivery distance, estimated delivery times may already account for preparation time reasonably well.

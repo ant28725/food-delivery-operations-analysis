@@ -98,3 +98,47 @@ ORDER BY
 -- Delay rate increased only modestly, from 8.79% for orders under 10 km to 10.26% for orders 30+ km.
 -- Average minutes over estimate remained close to zero across distance buckets.
 -- Distance increases delivery duration but does not appear to be a major delay-risk driver by itself.
+
+
+-- 4. Delay rate by preparation time bucket
+-- Evaluates whether longer restaurant preparation times are associated with higher delay risk.
+
+WITH prep_groups AS (
+    SELECT
+        CASE
+            WHEN preparation_time_minutes < 20 THEN 'Under 20 min'
+            WHEN preparation_time_minutes >= 20 AND preparation_time_minutes < 30 THEN '20-29.99 min'
+            WHEN preparation_time_minutes >= 30 AND preparation_time_minutes < 40 THEN '30-39.99 min'
+            ELSE '40+ min'
+        END AS prep_time_bucket,
+        delayed_delivery_flag,
+        delivery_time_minutes,
+        estimated_delivery_time,
+        customer_rating,
+        refund_flag
+    FROM public.delivery_stats
+)
+
+SELECT
+    prep_time_bucket,
+    COUNT(*) AS total_orders,
+    ROUND(100.0 * AVG(delayed_delivery_flag::int), 2) AS delay_rate_pct,
+    ROUND(AVG(delivery_time_minutes), 2) AS avg_delivery_time,
+    ROUND(AVG(delivery_time_minutes - estimated_delivery_time), 2) AS avg_minutes_over_estimate,
+    ROUND(AVG(customer_rating), 2) AS avg_customer_rating,
+    ROUND(100.0 * AVG(refund_flag::int), 2) AS refund_rate_pct
+FROM prep_groups
+GROUP BY prep_time_bucket
+ORDER BY
+    CASE prep_time_bucket
+        WHEN 'Under 20 min' THEN 1
+        WHEN '20-29.99 min' THEN 2
+        WHEN '30-39.99 min' THEN 3
+        ELSE 4
+    END;
+
+-- Result Summary:
+-- Average delivery time increased as preparation time increased, from 77.18 minutes for orders under 20 minutes to 108.34 minutes for orders with 40+ minutes of prep time.
+-- Delay rate increased only slightly, from 9.26% for orders under 20 minutes to 9.95% for orders with 40+ minutes of prep time.
+-- Average minutes over estimate remained close to zero across preparation-time buckets.
+-- Preparation time increases total delivery duration but does not appear to be a major delay-risk driver by itself.
