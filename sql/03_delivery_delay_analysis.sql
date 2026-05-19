@@ -183,3 +183,44 @@ ORDER BY
 -- Delay rate changed only slightly, from 9.15% in low traffic to 9.58% in high traffic.
 -- Average minutes over estimate remained close to zero across traffic groups.
 -- Traffic increases delivery duration but does not appear to be a major delay-risk driver by itself.
+
+-- 6. Delay rate by weather severity
+-- Evaluates whether weather severity is associated with higher delay risk.
+
+WITH weather_groups AS (
+    SELECT
+        CASE
+            WHEN weather_severity_score < 3 THEN 'Low Weather Severity'
+            WHEN weather_severity_score >= 3 AND weather_severity_score < 7 THEN 'Moderate Weather Severity'
+            ELSE 'High Weather Severity'
+        END AS weather_bucket,
+        delayed_delivery_flag,
+        delivery_time_minutes,
+        estimated_delivery_time,
+        customer_rating,
+        refund_flag
+    FROM public.delivery_stats
+)
+
+SELECT
+    weather_bucket,
+    COUNT(*) AS total_orders,
+    ROUND(100.0 * AVG(delayed_delivery_flag::int), 2) AS delay_rate_pct,
+    ROUND(AVG(delivery_time_minutes), 2) AS avg_delivery_time,
+    ROUND(AVG(delivery_time_minutes - estimated_delivery_time), 2) AS avg_minutes_over_estimate,
+    ROUND(AVG(customer_rating), 2) AS avg_customer_rating,
+    ROUND(100.0 * AVG(refund_flag::int), 2) AS refund_rate_pct
+FROM weather_groups
+GROUP BY weather_bucket
+ORDER BY
+    CASE weather_bucket
+        WHEN 'Low Weather Severity' THEN 1
+        WHEN 'Moderate Weather Severity' THEN 2
+        ELSE 3
+    END;
+
+-- Result Summary:
+-- Average delivery time increased from 88.43 minutes in low-severity weather to 99.48 minutes in high-severity weather.
+-- Delay rate changed only modestly, from 9.46% in low-severity weather to 10.02% in high-severity weather.
+-- Average minutes over estimate remained close to zero across weather groups.
+-- Weather severity increases delivery duration but does not appear to be a major delay-risk driver by itself.

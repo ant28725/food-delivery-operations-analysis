@@ -131,3 +131,11 @@ Traffic level was associated with longer delivery times. Low-traffic orders aver
 However, delay rates were relatively similar across traffic groups. Low-traffic orders had a 9.15% delay rate, moderate-traffic orders had a 9.61% delay rate, and high-traffic orders had a 9.58% delay rate.
 
 This suggests that higher traffic conditions increased delivery duration, but did not dramatically increase the likelihood of an order being flagged as delayed. Similar to distance and preparation time, the estimated delivery time may already account for traffic conditions reasonably well.
+
+### 2.6 Delay Rate by Weather Severity
+
+Weather severity was associated with longer delivery times. Low-severity weather orders averaged 88.43 minutes, while high-severity weather orders averaged 99.48 minutes.
+
+However, delay rates remained relatively close across weather groups. Low-severity weather orders had a 9.46% delay rate, moderate-severity weather orders had a 9.04% delay rate, and high-severity weather orders had a 10.02% delay rate.
+
+This suggests that more severe weather conditions increased delivery duration, but did not dramatically increase delay risk by themselves. As with distance, preparation time, and traffic, estimated delivery times may already account for weather-related delivery conditions reasonably well.
