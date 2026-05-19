@@ -224,3 +224,28 @@ ORDER BY
 -- Delay rate changed only modestly, from 9.46% in low-severity weather to 10.02% in high-severity weather.
 -- Average minutes over estimate remained close to zero across weather groups.
 -- Weather severity increases delivery duration but does not appear to be a major delay-risk driver by itself.
+
+-- 7. Delay rate by city tier
+-- Evaluates whether the highest-volume city tier also carries higher delivery delay risk.
+
+SELECT
+    city_tier,
+    COUNT(*) AS total_orders,
+    ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS pct_of_orders,
+    ROUND(100.0 * AVG(delayed_delivery_flag::int), 2) AS delay_rate_pct,
+    ROUND(AVG(delivery_time_minutes), 2) AS avg_delivery_time,
+    ROUND(AVG(delivery_time_minutes - estimated_delivery_time), 2) AS avg_minutes_over_estimate,
+    ROUND(AVG(preparation_time_minutes), 2) AS avg_prep_time,
+    ROUND(AVG(delivery_distance_km), 2) AS avg_distance_km,
+    ROUND(AVG(traffic_level_score), 2) AS avg_traffic_score,
+    ROUND(AVG(weather_severity_score), 2) AS avg_weather_score
+FROM public.delivery_stats
+GROUP BY city_tier
+ORDER BY city_tier;
+
+-- Result Summary:
+-- City Tier 3 accounted for 7,520 orders, or 50.13% of total order volume.
+-- City Tier 3 had the highest delay rate at 9.75%.
+-- City Tier 1 had a 9.32% delay rate, and City Tier 2 had a 9.05% delay rate.
+-- Delivery time, prep time, distance, traffic, and weather were very similar across city tiers.
+-- City Tier 3 represents the greatest operational exposure due to volume, not because of a major performance gap.

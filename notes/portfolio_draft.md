@@ -139,3 +139,11 @@ Weather severity was associated with longer delivery times. Low-severity weather
 However, delay rates remained relatively close across weather groups. Low-severity weather orders had a 9.46% delay rate, moderate-severity weather orders had a 9.04% delay rate, and high-severity weather orders had a 10.02% delay rate.
 
 This suggests that more severe weather conditions increased delivery duration, but did not dramatically increase delay risk by themselves. As with distance, preparation time, and traffic, estimated delivery times may already account for weather-related delivery conditions reasonably well.
+
+### 2.7 Delay Rate by City Tier
+
+City Tier 3 accounted for 50.13% of total orders, making it the largest demand segment in the dataset. It also had the highest delay rate at 9.75%, compared to 9.32% for City Tier 1 and 9.05% for City Tier 2.
+
+Although City Tier 3 had the highest delay rate, the difference between city tiers was relatively small. Average delivery time, preparation time, delivery distance, traffic score, and weather score were also very similar across city tiers.
+
+This suggests that City Tier 3 carries the greatest operational exposure because it handles the most order volume, but it does not appear dramatically less efficient than the other city tiers. The business risk is more about scale than a major difference in delivery performance.
