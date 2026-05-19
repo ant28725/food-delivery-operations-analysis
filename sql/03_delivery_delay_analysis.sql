@@ -142,3 +142,44 @@ ORDER BY
 -- Delay rate increased only slightly, from 9.26% for orders under 20 minutes to 9.95% for orders with 40+ minutes of prep time.
 -- Average minutes over estimate remained close to zero across preparation-time buckets.
 -- Preparation time increases total delivery duration but does not appear to be a major delay-risk driver by itself.
+
+-- 5. Delay rate by traffic level
+-- Evaluates whether traffic severity is associated with higher delay risk.
+
+WITH traffic_groups AS (
+    SELECT
+        CASE
+            WHEN traffic_level_score < 3 THEN 'Low Traffic'
+            WHEN traffic_level_score >= 3 AND traffic_level_score < 7 THEN 'Moderate Traffic'
+            ELSE 'High Traffic'
+        END AS traffic_bucket,
+        delayed_delivery_flag,
+        delivery_time_minutes,
+        estimated_delivery_time,
+        customer_rating,
+        refund_flag
+    FROM public.delivery_stats
+)
+
+SELECT
+    traffic_bucket,
+    COUNT(*) AS total_orders,
+    ROUND(100.0 * AVG(delayed_delivery_flag::int), 2) AS delay_rate_pct,
+    ROUND(AVG(delivery_time_minutes), 2) AS avg_delivery_time,
+    ROUND(AVG(delivery_time_minutes - estimated_delivery_time), 2) AS avg_minutes_over_estimate,
+    ROUND(AVG(customer_rating), 2) AS avg_customer_rating,
+    ROUND(100.0 * AVG(refund_flag::int), 2) AS refund_rate_pct
+FROM traffic_groups
+GROUP BY traffic_bucket
+ORDER BY
+    CASE traffic_bucket
+        WHEN 'Low Traffic' THEN 1
+        WHEN 'Moderate Traffic' THEN 2
+        ELSE 3
+    END;
+
+-- Result Summary:
+-- Average delivery time increased from 86.89 minutes in low traffic to 100.79 minutes in high traffic.
+-- Delay rate changed only slightly, from 9.15% in low traffic to 9.58% in high traffic.
+-- Average minutes over estimate remained close to zero across traffic groups.
+-- Traffic increases delivery duration but does not appear to be a major delay-risk driver by itself.

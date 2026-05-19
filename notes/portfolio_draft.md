@@ -123,3 +123,11 @@ Preparation time showed a clear relationship with total delivery duration. Order
 However, delay rates remained relatively similar across preparation-time groups. Orders under 20 minutes had a 9.26% delay rate, while orders with 40+ minutes of preparation time had a 9.95% delay rate.
 
 This suggests that longer preparation times increase total delivery duration, but they do not appear to substantially increase delay risk by themselves. Similar to delivery distance, estimated delivery times may already account for preparation time reasonably well.
+
+### 2.5 Delay Rate by Traffic Level
+
+Traffic level was associated with longer delivery times. Low-traffic orders averaged 86.89 minutes, while high-traffic orders averaged 100.79 minutes.
+
+However, delay rates were relatively similar across traffic groups. Low-traffic orders had a 9.15% delay rate, moderate-traffic orders had a 9.61% delay rate, and high-traffic orders had a 9.58% delay rate.
+
+This suggests that higher traffic conditions increased delivery duration, but did not dramatically increase the likelihood of an order being flagged as delayed. Similar to distance and preparation time, the estimated delivery time may already account for traffic conditions reasonably well.
