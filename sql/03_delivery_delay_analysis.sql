@@ -249,3 +249,77 @@ ORDER BY city_tier;
 -- City Tier 1 had a 9.32% delay rate, and City Tier 2 had a 9.05% delay rate.
 -- Delivery time, prep time, distance, traffic, and weather were very similar across city tiers.
 -- City Tier 3 represents the greatest operational exposure due to volume, not because of a major performance gap.
+
+-- 8. Delay rate by delivery partner experience
+-- Evaluates whether more experienced delivery partners have lower delay rates
+-- or better delivery/customer outcomes.
+
+SELECT
+    delivery_partner_experience_years,
+    COUNT(*) AS total_orders,
+    ROUND(100.0 * AVG(delayed_delivery_flag::int), 2) AS delay_rate_pct,
+    ROUND(AVG(delivery_time_minutes), 2) AS avg_delivery_time,
+    ROUND(AVG(delivery_time_minutes - estimated_delivery_time), 2) AS avg_minutes_over_estimate,
+    ROUND(AVG(delivery_partner_rating), 2) AS avg_partner_rating,
+    ROUND(AVG(customer_rating), 2) AS avg_customer_rating,
+    ROUND(100.0 * AVG(refund_flag::int), 2) AS refund_rate_pct
+FROM public.delivery_stats
+GROUP BY delivery_partner_experience_years
+ORDER BY delivery_partner_experience_years;
+
+-- Result Summary:
+-- Delivery partner experience did not show a clear linear relationship with delay rate.
+-- Lower delay rates appeared at 7 years, 9 years, and 15 years of experience.
+-- The highest delay rate appeared at 14 years of experience with 11.23%.
+-- Average delivery times were relatively similar across experience levels, generally ranging from about 92 to 96 minutes.
+-- Partner ratings were also very similar across experience levels, staying close to 4.2.
+-- Experience alone does not appear to be a strong delay predictor in this dataset.
+
+-- 9. High-risk operational segments
+-- Combines city tier, delivery distance, and preparation time to identify
+-- order profiles with the highest delay rates.
+
+WITH risk_segments AS (
+    SELECT
+        city_tier,
+        CASE
+            WHEN delivery_distance_km < 10 THEN 'Under 10 km'
+            WHEN delivery_distance_km >= 10 AND delivery_distance_km < 20 THEN '10-19.99 km'
+            WHEN delivery_distance_km >= 20 AND delivery_distance_km < 30 THEN '20-29.99 km'
+            ELSE '30+ km'
+        END AS distance_bucket,
+        CASE
+            WHEN preparation_time_minutes < 20 THEN 'Under 20 min'
+            WHEN preparation_time_minutes >= 20 AND preparation_time_minutes < 30 THEN '20-29.99 min'
+            WHEN preparation_time_minutes >= 30 AND preparation_time_minutes < 40 THEN '30-39.99 min'
+            ELSE '40+ min'
+        END AS prep_time_bucket,
+        delayed_delivery_flag,
+        delivery_time_minutes,
+        estimated_delivery_time,
+        customer_rating,
+        refund_flag
+    FROM public.delivery_stats
+)
+
+SELECT
+    city_tier,
+    distance_bucket,
+    prep_time_bucket,
+    COUNT(*) AS total_orders,
+    ROUND(100.0 * AVG(delayed_delivery_flag::int), 2) AS delay_rate_pct,
+    ROUND(AVG(delivery_time_minutes), 2) AS avg_delivery_time,
+    ROUND(AVG(delivery_time_minutes - estimated_delivery_time), 2) AS avg_minutes_over_estimate,
+    ROUND(AVG(customer_rating), 2) AS avg_customer_rating,
+    ROUND(100.0 * AVG(refund_flag::int), 2) AS refund_rate_pct
+FROM risk_segments
+GROUP BY city_tier, distance_bucket, prep_time_bucket
+HAVING COUNT(*) >= 100
+ORDER BY delay_rate_pct DESC
+LIMIT 10;
+
+-- Result Summary:
+-- The highest delay-rate segment was City Tier 1 + 30+ km + Under 20 min prep, with a 12.50% delay rate across 232 orders.
+-- City Tier 3 + 30+ km + 40+ min prep had a 12.05% delay rate across 722 orders and an average delivery time of 145.87 minutes.
+-- The top high-risk segments ranged from 10.85% to 12.50% delay rate, compared to the overall delay rate of 9.47%.
+-- Multi-factor order profiles revealed clearer delay-risk patterns than individual variables alone.

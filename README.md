@@ -95,7 +95,23 @@ The demand analysis showed that order volume was not heavily concentrated by hou
 
 ### 2. Delivery Delay Analysis
 
-_To be completed._
+### 2. Delivery Delay Analysis
+
+This section compares delayed and non-delayed orders and investigates which operational factors are associated with higher delay risk.
+
+#### Key Delay Findings
+
+- **1,420 orders** were flagged as delayed, representing an overall delay rate of **9.47%**.
+- Delayed orders averaged **110.49 minutes**, compared to **92.43 minutes** for non-delayed orders.
+- Delayed orders exceeded estimated delivery time by an average of **14.31 minutes**, while non-delayed orders arrived **1.50 minutes earlier than estimated** on average.
+- Delivery distance, preparation time, traffic level, and weather severity all increased actual delivery duration, but each had only a modest effect on delay rate when analyzed individually.
+- City Tier 3 accounted for **50.13%** of total orders and had the highest city-tier delay rate at **9.75%**, creating the greatest operational exposure due to volume.
+- Delivery partner experience did not show a clear linear relationship with delay rate.
+- The strongest delay patterns appeared when combining factors. City Tier 3 orders traveling **30+ km** with **40+ minutes** of preparation time had a **12.05%** delay rate across **722 orders** and an average delivery time of **145.87 minutes**.
+
+#### Delivery Delay Takeaway
+
+Delay risk was not strongly explained by any single operational factor. Instead, the highest-risk segments appeared when multiple conditions were combined, such as longer delivery distance, longer preparation time, and high-volume city tiers. This suggests that operational monitoring should focus on multi-factor risk profiles rather than isolated variables alone.
 
 ### 3. Customer and Business Impact
 

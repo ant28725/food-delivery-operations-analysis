@@ -147,3 +147,29 @@ City Tier 3 accounted for 50.13% of total orders, making it the largest demand s
 Although City Tier 3 had the highest delay rate, the difference between city tiers was relatively small. Average delivery time, preparation time, delivery distance, traffic score, and weather score were also very similar across city tiers.
 
 This suggests that City Tier 3 carries the greatest operational exposure because it handles the most order volume, but it does not appear dramatically less efficient than the other city tiers. The business risk is more about scale than a major difference in delivery performance.
+
+### 2.8 Delay Rate by Delivery Partner Experience
+
+Delivery partner experience did not show a clear linear relationship with delay rate. Some experience levels had lower delay rates, such as 7 years at 8.36%, 9 years at 8.47%, and 15 years at 8.39%. However, other higher-experience groups still had elevated delay rates, including 14 years at 11.23%.
+
+Average delivery times were also relatively similar across experience levels, generally ranging from about 92 to 96 minutes. Delivery partner ratings were nearly identical across groups, staying close to 4.2.
+
+This suggests that delivery partner experience alone does not appear to be a strong predictor of delayed deliveries in this dataset. Delays may be influenced more by a combination of factors rather than partner experience by itself.
+
+### 2.9 High-Risk Operational Segments
+
+After analyzing individual delay factors, I grouped orders by city tier, delivery distance bucket, and preparation-time bucket to identify higher-risk operational segments. This helped determine whether combinations of factors produced stronger delay patterns than any single variable alone.
+
+The highest delay-rate segment was City Tier 1 orders traveling 30+ km with under 20 minutes of preparation time, which had a 12.50% delay rate across 232 orders. However, the more operationally important segment was City Tier 3 orders traveling 30+ km with 40+ minutes of preparation time. This segment had a 12.05% delay rate across 722 orders and an average delivery time of 145.87 minutes.
+
+This suggests that delay risk is better understood through multi-factor order profiles rather than isolated variables. While distance, preparation time, traffic, and weather each increased actual delivery duration, the highest-risk delay segments appeared when multiple operational conditions were combined.
+
+### Section 2 Summary: Delivery Delay Analysis
+
+The delivery delay analysis showed that 1,420 out of 15,000 orders were flagged as delayed, resulting in an overall delay rate of 9.47%. Delayed orders averaged 110.49 minutes compared to 92.43 minutes for non-delayed orders, and delayed orders exceeded their estimated delivery time by an average of 14.31 minutes.
+
+Individual operational factors such as delivery distance, preparation time, traffic level, and weather severity all increased actual delivery duration. However, these variables only modestly increased delay rates when analyzed separately. This suggests that estimated delivery times may already account for many of these operational conditions.
+
+The strongest delay insight came from analyzing combined operational segments. Certain combinations of city tier, distance, and preparation time produced delay rates above the overall average. In particular, City Tier 3 orders traveling 30+ km with 40+ minutes of preparation time had a 12.05% delay rate across 722 orders and an average delivery time of 145.87 minutes.
+
+Overall, delay risk appears to be driven less by one single factor and more by combinations of operational conditions. This provides a stronger foundation for targeted monitoring, staffing, and delivery management strategies.
