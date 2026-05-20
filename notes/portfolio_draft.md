@@ -257,3 +257,68 @@ Refund attribution analysis suggested that 21.54% of all refunds were associated
 The strongest threshold finding came from grouping orders by lateness. Refund rates remained near 3% for on-time/early orders and orders 1-10 minutes late, but increased to 12.33% for orders 11-20 minutes late and 17.57% for orders more than 20 minutes late. This suggests that preventing orders from crossing the 10-minute late threshold could reduce refund-related exposure.
 
 Overall, lateness was the clearest business-impact signal in the available data. However, because this is a synthetic dataset and most refunds were not fully explained by delay-related risk, additional data such as refund reason codes, missing item complaints, food quality issues, support tickets, and customer reorder behavior would be needed for a more complete refund analysis.
+
+## Section 4: Recommendations
+
+Based on the demand, delay, and refund analysis, I developed recommendations focused on reducing delay-related refund exposure, improving operational monitoring, and prioritizing high-risk order segments.
+
+### Recommendation 1: Monitor Orders Approaching the 10-Minute Late Threshold
+
+The clearest refund-risk threshold appeared when orders were more than 10 minutes late. Orders that were on time, early, or 1-10 minutes late had refund rates around 3%, while orders 11-20 minutes late had a refund rate of 12.33% and orders more than 20 minutes late had a refund rate of 17.57%.
+
+Because the 11-20 minute late group had much higher order volume than the 20+ minute late group, it represented the more important operational target. The business should monitor orders approaching 10 minutes late and trigger proactive interventions before they cross that threshold.
+
+Potential actions could include:
+- notifying customers before delays become severe
+- prioritizing driver assignment for orders close to the 10-minute late mark
+- offering small credits before customers request refunds
+- flagging orders with high delay-risk profiles for closer monitoring
+
+### Recommendation 2: Focus on Multi-Factor Delay Risk Profiles
+
+Individual factors such as delivery distance, preparation time, traffic, and weather increased actual delivery duration, but none of them dramatically increased delay rates on their own. The strongest delay patterns appeared when multiple operational conditions were combined.
+
+For example, City Tier 3 orders traveling 30+ km with 40+ minutes of preparation time had a 12.05% delay rate across 722 orders and an average delivery time of 145.87 minutes. This segment is operationally important because it combines high volume, long delivery time, and elevated delay risk.
+
+Rather than monitoring distance, prep time, traffic, or weather separately, the business should create a risk-scoring approach that combines multiple variables.
+
+A basic high-risk profile could include:
+- long delivery distance
+- long preparation time
+- high-volume city tier
+- elevated traffic or weather severity
+- order already trending above estimated delivery time
+
+### Recommendation 3: Prioritize City Tier 3 for Operational Monitoring
+
+City Tier 3 accounted for 50.13% of total orders and generated $896,562.86 in revenue. Although its delay rate was only slightly higher than other city tiers, it represented the greatest operational exposure because it handled roughly half of all demand.
+
+This means even small improvements in City Tier 3 delivery performance could have an outsized impact on total delayed orders and refund-related exposure.
+
+The business should prioritize City Tier 3 when:
+- monitoring delivery capacity
+- allocating delivery partners
+- reviewing high-risk late orders
+- analyzing refund trends
+- testing operational improvements
+
+### Recommendation 4: Investigate Refund Reasons Beyond Delivery Delays
+
+Delayed orders were nearly four times more likely to result in refunds, but refund attribution analysis estimated that only 21.54% of all refunds were associated with delay-related excess risk. The remaining 78.46% were likely tied to other factors not fully explained by the available data.
+
+This means that reducing delays could help lower refund exposure, but it would not solve the entire refund problem.
+
+To better understand refund behavior, the business should collect additional data such as:
+- refund reason codes
+- missing-item complaints
+- incorrect-order reports
+- food quality issues
+- customer support ticket categories
+- restaurant-level fulfillment issues
+- customer reorder behavior after refund events
+
+### Recommendation Summary
+
+The analysis suggests that the most actionable opportunity is not simply reducing all delivery times, but preventing orders from becoming meaningfully late. Refund risk increased sharply after the 10-minute late threshold, making this a practical point for operational monitoring.
+
+The business should focus on identifying high-risk orders before they become severely late, especially in high-volume segments like City Tier 3. At the same time, refund analysis should be expanded with more detailed refund reason data, since most refunds were not fully explained by delay-related risk alone.

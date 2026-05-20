@@ -134,7 +134,18 @@ This section analyzes how delayed deliveries relate to customer ratings, tips, r
 Delayed deliveries did not meaningfully reduce ratings, tips, cancellations, or final payment in this synthetic dataset, but they were strongly associated with higher refund risk. The clearest business-impact threshold appeared when orders were more than 10 minutes late, suggesting that operational monitoring should focus on preventing orders from crossing that lateness threshold.
 ### 4. Recommendations
 
-_To be completed._
+This section translates the SQL findings into business recommendations focused on reducing delay-related refund exposure and improving operational monitoring.
+
+#### Key Recommendations
+
+- **Monitor orders approaching the 10-minute late threshold.** Refund rates stayed near 3% for on-time/early orders and orders 1-10 minutes late, but increased to 12.33% for orders 11-20 minutes late and 17.57% for orders more than 20 minutes late.
+- **Focus on multi-factor delay risk profiles.** Individual factors like distance, preparation time, traffic, and weather did not strongly explain delays on their own, but combined operational profiles revealed higher-risk segments.
+- **Prioritize City Tier 3 for operational monitoring.** City Tier 3 accounted for 50.13% of total orders and had the greatest operational exposure due to volume.
+- **Investigate refund reasons beyond delivery delays.** Delay-related excess risk explained an estimated 21.54% of all refunds, meaning most refund activity likely involved other factors not captured in the dataset.
+
+#### Recommendation Takeaway
+
+The strongest operational opportunity is to prevent orders from crossing the 10-minute late threshold, especially in high-volume or high-risk segments. However, because most refunds were not fully explained by delay-related risk, future analysis should include refund reason codes, missing-item complaints, food quality issues, support tickets, and customer reorder behavior.
 
 ## Tableau Dashboard
 
