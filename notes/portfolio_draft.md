@@ -173,3 +173,87 @@ Individual operational factors such as delivery distance, preparation time, traf
 The strongest delay insight came from analyzing combined operational segments. Certain combinations of city tier, distance, and preparation time produced delay rates above the overall average. In particular, City Tier 3 orders traveling 30+ km with 40+ minutes of preparation time had a 12.05% delay rate across 722 orders and an average delivery time of 145.87 minutes.
 
 Overall, delay risk appears to be driven less by one single factor and more by combinations of operational conditions. This provides a stronger foundation for targeted monitoring, staffing, and delivery management strategies.
+
+## Section 3: Customer and Business Impact
+
+After identifying delivery delay patterns, I analyzed whether delayed deliveries were associated with worse customer and business outcomes. This section compares delayed and non-delayed orders across customer ratings, tips, refunds, cancellations, and final amount paid.
+
+### 3.1 Delayed vs Non-Delayed Customer and Business Outcomes
+
+Delayed deliveries were strongly associated with higher refund risk, but they did not show a meaningful negative relationship with customer ratings, tips, cancellations, or final amount paid.
+
+Delayed orders had a refund rate of 12.61%, compared to 3.23% for non-delayed orders. This represents a 9.38 percentage-point increase in refund rate, meaning delayed orders were nearly four times more likely to result in a refund.
+
+However, average customer ratings were nearly identical between the two groups, with delayed orders averaging 4.01 compared to 3.99 for non-delayed orders. Average tips were also nearly identical at $12.60 for delayed orders and $12.57 for non-delayed orders. Cancellation rates were similar as well, with delayed orders at 13.10% and non-delayed orders at 13.38%.
+
+This suggests that, in this synthetic dataset, the clearest business impact of delayed deliveries is refund risk rather than lower ratings, lower tips, or increased cancellations.
+
+### 3.2 Estimated Delay-Related Refund Exposure
+
+Because delayed orders had a much higher refund rate than non-delayed orders, I estimated the potential refund-related revenue exposure associated with delays.
+
+Delayed orders had a refund rate of 12.61%, compared to 3.23% for non-delayed orders. This created an excess refund rate of 9.37 percentage points. Using the non-delayed refund rate as a baseline, I estimated that approximately 133 refunded orders were associated with excess delay risk.
+
+The average final amount paid for delayed orders was $118.39. Multiplying the estimated excess refunded orders by the average delayed order value produced an estimated delay-related refund exposure of $15,756.80 across the 15,000-order dataset.
+
+This estimate should be interpreted as an approximation of refund exposure associated with delays, not as a causal measurement. However, it helps translate the operational delay problem into a business-impact metric.
+
+### 3.3 Refund Attribution: Delays vs Other Factors
+
+To estimate how much of the refund problem was associated with delays, I used the non-delayed refund rate as a baseline. Non-delayed orders had a refund rate of 3.23%, while delayed orders had a refund rate of 12.61%.
+
+Based on the non-delayed refund baseline, delayed orders would have been expected to generate approximately 46 refunds. Instead, delayed orders generated 179 refunds. The difference of 133 refunds represents the estimated excess refund volume associated with delayed deliveries.
+
+Across the full dataset, there were 618 total refunds. The estimated 133 delay-attributable refunds represented 21.54% of all refunds, while the remaining 78.46% were likely associated with other factors.
+
+This suggests that delivery delays are an important contributor to refunds, but they do not explain the majority of refund activity. Other potential refund drivers may include restaurant quality, order accuracy, customer expectations, promo behavior, order value, delivery partner performance, or issues not directly captured in the dataset.
+
+### 3.4 Other Potential Refund Drivers
+
+After estimating that 21.54% of refunds were associated with excess delay risk, I compared refunded and non-refunded orders to identify other possible refund drivers.
+
+Refunded orders had a delayed-order rate of 28.96%, compared to only 8.63% for non-refunded orders. Refunded orders also averaged 3.26 minutes over the estimated delivery time, while non-refunded orders arrived 0.14 minutes earlier than estimated on average.
+
+Customer ratings were slightly lower for refunded orders, averaging 3.92 compared to 4.00 for non-refunded orders. However, other variables such as restaurant rating, delivery partner rating, preparation time, delivery distance, order value, discount amount, item count, and promo usage were very similar between refunded and non-refunded orders.
+
+This suggests that delay-related performance is the clearest observed difference between refunded and non-refunded orders in the available data. However, because most refunds were not attributed to delay-related excess risk, additional variables would likely be needed to explain the remaining refund activity. Useful missing data could include missing-item complaints, incorrect orders, food quality issues, customer support tickets, refund reason codes, and customer reorder behavior.
+
+### 3.5 Refund Rate by Lateness Bucket
+
+To better understand the relationship between lateness and refunds, I grouped orders by how far actual delivery time exceeded estimated delivery time.
+
+Refund rates remained low for orders that were on time, early, or only slightly late. On-time or early orders had a refund rate of 3.33%, while orders that were 1-10 minutes late had a refund rate of 3.10%.
+
+However, refund risk increased sharply once orders were more than 10 minutes late. Orders that were 11-20 minutes late had a refund rate of 12.33%, and orders that were more than 20 minutes late had a refund rate of 17.57%.
+
+This suggests that the most important operational threshold may be preventing orders from crossing the 10-minute late mark. While minor lateness did not appear to increase refund risk, more substantial lateness was associated with a much higher likelihood of refund activity.
+
+### 3.6 Refund Exposure by Lateness Bucket
+
+I also analyzed refunded order value by lateness bucket to understand which lateness groups created the greatest financial exposure.
+
+Orders more than 20 minutes late had the highest refund rate at 17.57%, but this group contained only 74 orders and represented $1,673.60 in refunded order value. In contrast, orders that were 11-20 minutes late had a lower refund rate of 12.33%, but this group contained 1,346 orders and represented $19,713.05 in refunded order value.
+
+This suggests that the 11-20 minute late group is more operationally important than the 20+ minute late group because it combines elevated refund risk with much higher order volume. From a business perspective, preventing orders from crossing the 10-minute late threshold could reduce a larger portion of refund-related exposure.
+
+### 3.7 Refund and Delay Patterns by Customer Rating Group
+
+I grouped orders into high, medium, and low customer-rating categories to determine whether lower-rated orders showed worse refund, delay, cancellation, or revenue outcomes.
+
+Low-rated orders had a higher refund rate at 5.12%, compared to 3.80% for high-rated orders and 3.96% for medium-rated orders. However, the difference was much smaller than the refund-rate increase observed for late deliveries.
+
+Customer rating groups did not show a clear relationship with delay rate. Low-rated orders actually had a slightly lower delay rate at 8.80%, compared to 9.28% for high-rated orders and 9.70% for medium-rated orders. Cancellation rates, average tip amounts, and final amount paid were also relatively similar across rating groups.
+
+This suggests that customer ratings may have some relationship with refund behavior, but they are not the strongest signal in this dataset. Lateness remained the clearer indicator of elevated refund risk.
+
+### Section 3 Summary: Customer and Business Impact
+
+The customer and business impact analysis showed that delayed deliveries were strongly associated with higher refund risk, but not with lower ratings, lower tips, higher cancellations, or lower final payment.
+
+Delayed orders had a refund rate of 12.61%, compared to 3.23% for non-delayed orders. Using the non-delayed refund rate as a baseline, I estimated that 133 refunds were associated with excess delay risk, representing approximately $15,756.80 in delay-related refund exposure.
+
+Refund attribution analysis suggested that 21.54% of all refunds were associated with delay-related excess risk, while 78.46% were likely connected to other factors not fully captured in the dataset. When comparing refunded and non-refunded orders, the clearest observed difference was lateness: refunded orders had a delayed-order rate of 28.96%, compared to 8.63% for non-refunded orders.
+
+The strongest threshold finding came from grouping orders by lateness. Refund rates remained near 3% for on-time/early orders and orders 1-10 minutes late, but increased to 12.33% for orders 11-20 minutes late and 17.57% for orders more than 20 minutes late. This suggests that preventing orders from crossing the 10-minute late threshold could reduce refund-related exposure.
+
+Overall, lateness was the clearest business-impact signal in the available data. However, because this is a synthetic dataset and most refunds were not fully explained by delay-related risk, additional data such as refund reason codes, missing item complaints, food quality issues, support tickets, and customer reorder behavior would be needed for a more complete refund analysis.

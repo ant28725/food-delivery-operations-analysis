@@ -95,8 +95,6 @@ The demand analysis showed that order volume was not heavily concentrated by hou
 
 ### 2. Delivery Delay Analysis
 
-### 2. Delivery Delay Analysis
-
 This section compares delayed and non-delayed orders and investigates which operational factors are associated with higher delay risk.
 
 #### Key Delay Findings
@@ -115,8 +113,25 @@ Delay risk was not strongly explained by any single operational factor. Instead,
 
 ### 3. Customer and Business Impact
 
-_To be completed._
+This section analyzes how delayed deliveries relate to customer ratings, tips, refunds, cancellations, and estimated refund-related revenue exposure.
 
+#### Key Customer and Business Impact Findings
+
+- Delayed orders had a refund rate of **12.61%**, compared to **3.23%** for non-delayed orders.
+- Delayed orders were nearly **4x more likely** to result in a refund.
+- Customer ratings were nearly identical between delayed and non-delayed orders: **4.01** for delayed orders vs **3.99** for non-delayed orders.
+- Average tips were nearly identical: **$12.60** for delayed orders vs **$12.57** for non-delayed orders.
+- Cancellation rates were also similar: **13.10%** for delayed orders vs **13.38%** for non-delayed orders.
+- Using the non-delayed refund rate as a baseline, approximately **133 refunds** were associated with excess delay risk.
+- Estimated delay-related refund exposure was **$15,756.80** across the 15,000-order dataset.
+- Refund attribution analysis estimated that **21.54%** of all refunds were associated with delay-related excess risk, while **78.46%** were likely tied to other factors.
+- Refund risk increased sharply once orders were more than **10 minutes late**.
+- Orders **11-20 minutes late** had a **12.33%** refund rate, while orders **20+ minutes late** had a **17.57%** refund rate.
+- The 11-20 minute late group represented the more important operational target because it combined elevated refund risk with much higher order volume than the 20+ minute group.
+
+#### Customer and Business Impact Takeaway
+
+Delayed deliveries did not meaningfully reduce ratings, tips, cancellations, or final payment in this synthetic dataset, but they were strongly associated with higher refund risk. The clearest business-impact threshold appeared when orders were more than 10 minutes late, suggesting that operational monitoring should focus on preventing orders from crossing that lateness threshold.
 ### 4. Recommendations
 
 _To be completed._
