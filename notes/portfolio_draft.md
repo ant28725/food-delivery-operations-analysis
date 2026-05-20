@@ -322,3 +322,11 @@ To better understand refund behavior, the business should collect additional dat
 The analysis suggests that the most actionable opportunity is not simply reducing all delivery times, but preventing orders from becoming meaningfully late. Refund risk increased sharply after the 10-minute late threshold, making this a practical point for operational monitoring.
 
 The business should focus on identifying high-risk orders before they become severely late, especially in high-volume segments like City Tier 3. At the same time, refund analysis should be expanded with more detailed refund reason data, since most refunds were not fully explained by delay-related risk alone.
+
+## Section 5: Tableau Dashboard Preparation
+
+To prepare the analysis for Tableau, I created a SQL view called `food_delivery_dashboard_view`. This view keeps the original order-level data while adding calculated fields that make dashboard development easier.
+
+The view includes calculated segments for delivery status, lateness bucket, distance bucket, preparation-time bucket, traffic level, weather severity, customer type, promo usage, day type, order size, order value, refund status, cancellation status, and refund-risk group.
+
+Creating these fields in SQL helps keep the Tableau workbook cleaner and ensures that the same business logic is used consistently across charts and dashboard filters.

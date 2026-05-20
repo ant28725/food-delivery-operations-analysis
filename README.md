@@ -149,6 +149,16 @@ The strongest operational opportunity is to prevent orders from crossing the 10-
 
 ## Tableau Dashboard
 
+A Tableau dashboard will be created using the SQL view `public.food_delivery_dashboard_view`.
+
+The dashboard will focus on:
+
+- Demand patterns by hour, day, month, city tier, customer type, and order size
+- Delivery delay rates by operational segment
+- Lateness buckets and refund risk
+- Refund exposure and business impact
+- Recommended operational monitoring points
+
 _Tableau Public link will be added here._
 
 ## Portfolio Case Study
