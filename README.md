@@ -155,7 +155,6 @@ The dashboard uses `exports/food_delivery_dashboard_view.csv`, which contains cl
 
 [View the Tableau Public Dashboard](https://public.tableau.com/views/FoodDeliveryOperationsDashboard_17794634574220/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
-![Food Delivery Operations Dashboard](images/tableau_dashboard_final.png)
 
 ## Portfolio Case Study
 

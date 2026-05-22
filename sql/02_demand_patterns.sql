@@ -195,3 +195,48 @@ ORDER BY promo_code_used;
 -- Average final amount paid was nearly identical: $119.01 for promo orders vs $119.14 for non-promo orders.
 -- Average order value, discount amount, item count, and tip amount were also nearly identical.
 -- Promo usage was common but did not appear to materially increase average order value or final customer payment.
+
+-- 9. Demand by order size
+-- Groups orders by item count to compare order volume, revenue, average spend,
+-- tips, and delivery time by basket size.
+
+WITH order_size_summary AS (
+    SELECT
+        CASE
+            WHEN number_of_items = 1 THEN '1 item'
+            WHEN number_of_items BETWEEN 2 AND 3 THEN '2-3 items'
+            WHEN number_of_items BETWEEN 4 AND 5 THEN '4-5 items'
+            ELSE '6+ items'
+        END AS item_count_group,
+        COUNT(*) AS total_orders,
+        ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS pct_of_orders,
+        ROUND(SUM(final_amount_paid), 2) AS total_revenue,
+        ROUND(AVG(final_amount_paid), 2) AS avg_final_amount_paid,
+        ROUND(AVG(tip_amount), 2) AS avg_tip,
+        ROUND(AVG(delivery_time_minutes), 2) AS avg_delivery_time
+    FROM public.delivery_stats
+    GROUP BY
+        CASE
+            WHEN number_of_items = 1 THEN '1 item'
+            WHEN number_of_items BETWEEN 2 AND 3 THEN '2-3 items'
+            WHEN number_of_items BETWEEN 4 AND 5 THEN '4-5 items'
+            ELSE '6+ items'
+        END
+)
+
+SELECT *
+FROM order_size_summary
+ORDER BY
+    CASE item_count_group
+        WHEN '1 item' THEN 1
+        WHEN '2-3 items' THEN 2
+        WHEN '4-5 items' THEN 3
+        ELSE 4
+    END;
+
+-- Result Summary:
+-- Orders with 6+ items accounted for 8,759 orders, or 58.39% of total order volume.
+-- 1-item orders represented only 1,253 orders, or 8.35% of total order volume.
+-- Average final amount paid was very similar across item-count groups, ranging from $118.84 to $119.93.
+-- Average delivery time was also stable across item-count groups, ranging from 93.76 to 94.27 minutes.
+-- Item count appears to influence order volume distribution more than average customer spend or delivery time.
