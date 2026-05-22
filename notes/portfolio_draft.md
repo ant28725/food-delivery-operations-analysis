@@ -453,6 +453,6 @@ The dataset also lacks important operational fields such as exact order timestam
 
 ## Links
 
-- Tableau Dashboard:(https://public.tableau.com/views/FoodDeliveryOperationsDashboard_17794634574220/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+- [Tableau Dashboard](https://public.tableau.com/views/FoodDeliveryOperationsDashboard_17794634574220/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
-- GitHub Repository: (https://github.com/ant28725/food-delivery-operations-analysis/tree/main)
+- [GitHub Repository](https://github.com/ant28725/food-delivery-operations-analysis/tree/main)

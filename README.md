@@ -149,21 +149,17 @@ The strongest operational opportunity is to prevent orders from crossing the 10-
 
 ## Tableau Dashboard
 
-A Tableau dashboard will be created using the SQL view `public.food_delivery_dashboard_view`.
+Because Tableau Public does not connect directly to PostgreSQL, I exported the SQL view `public.food_delivery_dashboard_view` to a CSV and used that file as the Tableau data source.
 
-The dashboard will focus on:
+The dashboard uses `exports/food_delivery_dashboard_view.csv`, which contains cleaned order-level data plus SQL-generated fields such as delivery status, lateness bucket, distance bucket, preparation-time bucket, traffic bucket, weather bucket, customer type, promo status, order size group, order value group, refund status, cancellation status, and refund-risk group.
 
-- Demand patterns by hour, day, month, city tier, customer type, and order size
-- Delivery delay rates by operational segment
-- Lateness buckets and refund risk
-- Refund exposure and business impact
-- Recommended operational monitoring points
+[View the Tableau Public Dashboard](https://public.tableau.com/views/FoodDeliveryOperationsDashboard_17794634574220/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
-_Tableau Public link will be added here._
+![Food Delivery Operations Dashboard](images/tableau_dashboard_final.png)
 
 ## Portfolio Case Study
 
-_Portfolio website link will be added here._
+A polished portfolio case study version of this project is included in:  notes/portfolio_draft.md
 
 ## Author
 
