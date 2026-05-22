@@ -330,3 +330,129 @@ To prepare the analysis for Tableau, I created a SQL view called `food_delivery_
 The view includes calculated segments for delivery status, lateness bucket, distance bucket, preparation-time bucket, traffic level, weather severity, customer type, promo usage, day type, order size, order value, refund status, cancellation status, and refund-risk group.
 
 Creating these fields in SQL helps keep the Tableau workbook cleaner and ensures that the same business logic is used consistently across charts and dashboard filters.
+
+# Food Delivery Operations Analysis
+
+## Overview
+
+This project analyzes 15,000 synthetic food delivery orders to identify demand patterns, delivery delay behavior, and the business impact of late deliveries on refunds, cancellations, tips, and customer satisfaction.
+
+The main business question was:
+
+**What factors are driving delayed deliveries, and how do those delays affect customer satisfaction and business outcomes?**
+
+## Business Problem
+
+Food delivery platforms rely on timely deliveries, accurate estimated delivery times, and strong customer satisfaction. Delayed deliveries can create operational pressure and may increase refunds, reduce trust, or negatively affect the customer experience.
+
+This analysis explores whether delayed deliveries are associated with worse customer and business outcomes, and identifies which operational segments may require closer monitoring.
+
+## Tools Used
+
+- PostgreSQL
+- SQL
+- VS Code
+- Tableau Public
+- GitHub
+
+## Dataset
+
+The dataset contains 15,000 synthetic food delivery orders with fields related to order timing, city tier, customer information, delivery distance, preparation time, delivery time, estimated delivery time, traffic/weather scores, ratings, order value, tips, discounts, refunds, cancellations, promo usage, premium customer status, and delay flags.
+
+Because the dataset is synthetic, the findings should be interpreted as a portfolio-style business analysis rather than conclusions about a real company.
+
+## Analysis Process
+
+I structured the analysis into four phases:
+
+1. **Demand Patterns**  
+   I analyzed order volume and revenue by hour, day of week, month, city tier, weekend/festival status, premium customer status, promo usage, and order size.
+
+2. **Delivery Delay Analysis**  
+   I compared delayed and non-delayed orders, then analyzed delay rates by delivery distance, preparation time, traffic level, weather severity, city tier, delivery partner experience, and combined operational risk segments.
+
+3. **Customer and Business Impact**  
+   I examined how delayed deliveries related to refunds, cancellations, customer ratings, tips, and estimated refund-related revenue exposure.
+
+4. **Recommendations**  
+   I translated the findings into operational recommendations focused on delay monitoring, refund risk reduction, and future data collection.
+
+## Key Findings
+
+### 1. Demand was concentrated by city tier and day, not by hour or month.
+
+Hourly and monthly order volume were relatively evenly distributed. However, Day 1 accounted for 28.71% of all orders, and City Tier 3 accounted for 50.13% of total orders.
+
+City Tier 3 also generated $896,562.86 in revenue, making it the largest market segment by volume and total revenue.
+
+### 2. Premium customers spent more per order.
+
+Premium customers represented 28.14% of total orders but had an average final amount paid of $128.80 compared to $115.28 for non-premium customers. This means premium customers spent approximately 11.73% more per order.
+
+### 3. Delayed orders took significantly longer but were not clearly explained by one single factor.
+
+Delayed orders averaged 110.49 minutes compared to 92.43 minutes for non-delayed orders. Delayed orders also exceeded estimated delivery time by an average of 14.31 minutes.
+
+Distance, preparation time, traffic, and weather all increased actual delivery duration, but none of those variables dramatically increased delay rates on their own. The strongest delay patterns appeared when multiple factors were combined.
+
+### 4. Refund risk increased sharply after the 10-minute late threshold.
+
+Refund rates stayed near 3% for on-time/early orders and orders that were 1-10 minutes late. However, refund rates increased to 12.33% for orders 11-20 minutes late and 17.57% for orders more than 20 minutes late.
+
+This suggests that preventing orders from crossing the 10-minute late threshold may be the most actionable operational opportunity.
+
+### 5. Delayed orders were nearly four times more likely to result in refunds.
+
+Delayed orders had a refund rate of 12.61%, compared to 3.23% for non-delayed orders. Using the non-delayed refund rate as a baseline, I estimated that approximately 133 refunds were associated with excess delay risk, representing $15,756.80 in estimated delay-related refund exposure.
+
+### 6. Most refunds were likely tied to factors beyond delivery delays.
+
+Refund attribution analysis estimated that 21.54% of refunds were associated with delay-related excess risk, while 78.46% were likely related to other factors not fully captured in the dataset.
+
+Additional data such as refund reason codes, missing-item complaints, incorrect-order reports, support tickets, and customer reorder behavior would be needed to explain the remaining refund activity more precisely.
+
+## Dashboard
+
+The Tableau dashboard summarizes the analysis across demand patterns, delivery performance, and refund impact.
+
+The dashboard includes:
+
+- KPI overview
+- Orders by day of week
+- Orders by city tier
+- Average spend by customer type
+- Average delivery time by delivery status
+- Delay rate by distance and preparation time
+- Refund rate by delivery status
+- Refund rate by lateness bucket
+- Refunded order value by lateness bucket
+
+## Recommendations
+
+### 1. Monitor orders approaching the 10-minute late threshold.
+
+Refund risk increased sharply once orders exceeded 10 minutes late. The business should monitor orders approaching this threshold and intervene before they become meaningfully late.
+
+### 2. Use multi-factor delay risk profiles.
+
+Single variables did not strongly explain delay risk by themselves. A better monitoring strategy would combine city tier, distance, preparation time, traffic, weather, and current lateness status.
+
+### 3. Prioritize City Tier 3 for operational monitoring.
+
+City Tier 3 accounted for roughly half of all orders. Even modest improvements in this segment could have an outsized impact on total delayed orders and refund exposure.
+
+### 4. Collect more detailed refund reason data.
+
+Because most refunds were not fully explained by delay risk, future analysis should include refund reason codes, missing-item complaints, incorrect-order reports, food quality issues, support tickets, and customer reorder behavior.
+
+## Limitations
+
+This project uses a synthetic dataset, so findings should not be interpreted as real company performance. The analysis identifies patterns and associations, but it does not prove causation.
+
+The dataset also lacks important operational fields such as exact order timestamps, driver location, restaurant capacity, support ticket data, refund reason codes, and customer reorder behavior.
+
+## Links
+
+- Tableau Dashboard:(https://public.tableau.com/views/FoodDeliveryOperationsDashboard_17794634574220/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
+- GitHub Repository: (https://github.com/ant28725/food-delivery-operations-analysis/tree/main)
